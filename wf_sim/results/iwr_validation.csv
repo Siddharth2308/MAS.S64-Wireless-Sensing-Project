@@ -1,0 +1,3 @@
+sheet,measured_reflect,measured_reflect_err,measured_transmit,measured_transmit_err,thick_reflect,thick_transmit,thin_reflect,thin_reflect_range,thin_transmit,thin_transmit_range,eps,tan_delta,thickness_mm
+plastic,-8.983863933096927,0.04703593682249618,-2.822156209349828,0.2822156209349771,-12.599530138852774,-0.981992971407692,-7.77,"(-11.03, -7.14)",-3.1,"(-3.14, -0.83)",2.6,0.02,3.0
+glass,-8.70164831216195,0.04703593682249618,-5.550240545054649,0.2822156209349771,-7.530794228874193,-3.374963970397766,-8.15,"(-13.47, -3.19)",-5.94,"(-8.67, -0.39)",6.0,0.025,4.0

@@ -1,0 +1,369 @@
+{
+ "material_table": [
+  {
+   "material": "metal",
+   "eps": "PEC",
+   "R0_linear": 1.0,
+   "R0_dB": 0.0,
+   "brewster_deg": NaN,
+   "one_way_interface_loss_dB": NaN,
+   "cutoff_deg_thr-15dB": 14.9,
+   "cutoff_deg_thr-20dB": 17.2,
+   "cutoff_deg_thr-25dB": 19.2
+  },
+  {
+   "material": "glass",
+   "eps": 6.0,
+   "R0_linear": 0.1766,
+   "R0_dB": -7.53,
+   "brewster_deg": 67.8,
+   "one_way_interface_loss_dB": -0.84,
+   "cutoff_deg_thr-15dB": 10.5,
+   "cutoff_deg_thr-20dB": 13.6,
+   "cutoff_deg_thr-25dB": 16.0
+  },
+  {
+   "material": "PET",
+   "eps": 3.0,
+   "R0_linear": 0.0718,
+   "R0_dB": -11.44,
+   "brewster_deg": 60.0,
+   "one_way_interface_loss_dB": -0.32,
+   "cutoff_deg_thr-15dB": 7.2,
+   "cutoff_deg_thr-20dB": 11.2,
+   "cutoff_deg_thr-25dB": 14.1
+  },
+  {
+   "material": "PP",
+   "eps": 2.3,
+   "R0_linear": 0.0421,
+   "R0_dB": -13.75,
+   "brewster_deg": 56.6,
+   "one_way_interface_loss_dB": -0.19,
+   "cutoff_deg_thr-15dB": 4.3,
+   "cutoff_deg_thr-20dB": 9.6,
+   "cutoff_deg_thr-25dB": 12.9
+  },
+  {
+   "material": "acrylic",
+   "eps": 2.6,
+   "R0_linear": 0.055,
+   "R0_dB": -12.6,
+   "brewster_deg": 58.2,
+   "one_way_interface_loss_dB": -0.25,
+   "cutoff_deg_thr-15dB": 5.9,
+   "cutoff_deg_thr-20dB": 10.4,
+   "cutoff_deg_thr-25dB": 13.5
+  }
+ ],
+ "sheet_predictions": [
+  {
+   "material": "glass",
+   "eps": 6.0,
+   "thickness_mm": 4.0,
+   "tan_delta": 0.0,
+   "halfspace_R0_dB": -7.53,
+   "sheet_R_dB": -6.97,
+   "sheet_R_min_dB": -19.55,
+   "sheet_R_max_dB": -3.99,
+   "sheet_two_way_transmission_dB": -1.85
+  },
+  {
+   "material": "glass",
+   "eps": 6.0,
+   "thickness_mm": 4.0,
+   "tan_delta": 0.01,
+   "halfspace_R0_dB": -7.53,
+   "sheet_R_dB": -7.6,
+   "sheet_R_min_dB": -18.5,
+   "sheet_R_max_dB": -4.58,
+   "sheet_two_way_transmission_dB": -3.52
+  },
+  {
+   "material": "acrylic",
+   "eps": 2.6,
+   "thickness_mm": 3.0,
+   "tan_delta": 0.0,
+   "halfspace_R0_dB": -12.6,
+   "sheet_R_dB": -7.18,
+   "sheet_R_min_dB": -7.51,
+   "sheet_R_max_dB": -7.04,
+   "sheet_two_way_transmission_dB": -1.85
+  },
+  {
+   "material": "acrylic",
+   "eps": 2.6,
+   "thickness_mm": 3.0,
+   "tan_delta": 0.01,
+   "halfspace_R0_dB": -12.6,
+   "sheet_R_dB": -7.48,
+   "sheet_R_min_dB": -7.82,
+   "sheet_R_max_dB": -7.34,
+   "sheet_two_way_transmission_dB": -2.47
+  }
+ ],
+ "material_jar": [
+  {
+   "tilt_deg": 0,
+   "condition": "Uniform glass",
+   "part": "body",
+   "visible_fraction": 0.0,
+   "share_of_partial": 0.0,
+   "total_coverage": 0.0764,
+   "n_partial_points": 1528
+  },
+  {
+   "tilt_deg": 0,
+   "condition": "Uniform glass",
+   "part": "lid",
+   "visible_fraction": 0.3710539096648859,
+   "share_of_partial": 1.0,
+   "total_coverage": 0.0764,
+   "n_partial_points": 1528
+  },
+  {
+   "tilt_deg": 0,
+   "condition": "Per-part",
+   "part": "body",
+   "visible_fraction": 0.0,
+   "share_of_partial": 0.0,
+   "total_coverage": 0.0764,
+   "n_partial_points": 1528
+  },
+  {
+   "tilt_deg": 0,
+   "condition": "Per-part",
+   "part": "lid",
+   "visible_fraction": 0.3710539096648859,
+   "share_of_partial": 1.0,
+   "total_coverage": 0.0764,
+   "n_partial_points": 1528
+  },
+  {
+   "tilt_deg": 0,
+   "condition": "Per-part + trans.",
+   "part": "body",
+   "visible_fraction": 0.0,
+   "share_of_partial": 0.0,
+   "total_coverage": 0.0764,
+   "n_partial_points": 1528
+  },
+  {
+   "tilt_deg": 0,
+   "condition": "Per-part + trans.",
+   "part": "lid",
+   "visible_fraction": 0.3710539096648859,
+   "share_of_partial": 1.0,
+   "total_coverage": 0.0764,
+   "n_partial_points": 1528
+  },
+  {
+   "tilt_deg": 0,
+   "condition": "+ trans., measured loss",
+   "part": "body",
+   "visible_fraction": 0.0,
+   "share_of_partial": 0.0,
+   "total_coverage": 0.0764,
+   "n_partial_points": 1528
+  },
+  {
+   "tilt_deg": 0,
+   "condition": "+ trans., measured loss",
+   "part": "lid",
+   "visible_fraction": 0.3710539096648859,
+   "share_of_partial": 1.0,
+   "total_coverage": 0.0764,
+   "n_partial_points": 1528
+  },
+  {
+   "tilt_deg": 20,
+   "condition": "Uniform glass",
+   "part": "body",
+   "visible_fraction": 0.0,
+   "share_of_partial": 0.0,
+   "total_coverage": 0.0764,
+   "n_partial_points": 1528
+  },
+  {
+   "tilt_deg": 20,
+   "condition": "Uniform glass",
+   "part": "lid",
+   "visible_fraction": 0.3710539096648859,
+   "share_of_partial": 1.0,
+   "total_coverage": 0.0764,
+   "n_partial_points": 1528
+  },
+  {
+   "tilt_deg": 20,
+   "condition": "Per-part",
+   "part": "body",
+   "visible_fraction": 0.0,
+   "share_of_partial": 0.0,
+   "total_coverage": 0.0764,
+   "n_partial_points": 1528
+  },
+  {
+   "tilt_deg": 20,
+   "condition": "Per-part",
+   "part": "lid",
+   "visible_fraction": 0.3710539096648859,
+   "share_of_partial": 1.0,
+   "total_coverage": 0.0764,
+   "n_partial_points": 1528
+  },
+  {
+   "tilt_deg": 20,
+   "condition": "Per-part + trans.",
+   "part": "body",
+   "visible_fraction": 0.0,
+   "share_of_partial": 0.0,
+   "total_coverage": 0.0764,
+   "n_partial_points": 1528
+  },
+  {
+   "tilt_deg": 20,
+   "condition": "Per-part + trans.",
+   "part": "lid",
+   "visible_fraction": 0.3710539096648859,
+   "share_of_partial": 1.0,
+   "total_coverage": 0.0764,
+   "n_partial_points": 1528
+  },
+  {
+   "tilt_deg": 20,
+   "condition": "+ trans., measured loss",
+   "part": "body",
+   "visible_fraction": 0.0,
+   "share_of_partial": 0.0,
+   "total_coverage": 0.0764,
+   "n_partial_points": 1528
+  },
+  {
+   "tilt_deg": 20,
+   "condition": "+ trans., measured loss",
+   "part": "lid",
+   "visible_fraction": 0.3710539096648859,
+   "share_of_partial": 1.0,
+   "total_coverage": 0.0764,
+   "n_partial_points": 1528
+  },
+  {
+   "tilt_deg": 90,
+   "condition": "Uniform glass",
+   "part": "body",
+   "visible_fraction": 0.10426898375519456,
+   "share_of_partial": 0.8589211618257261,
+   "total_coverage": 0.0964,
+   "n_partial_points": 1928
+  },
+  {
+   "tilt_deg": 90,
+   "condition": "Uniform glass",
+   "part": "lid",
+   "visible_fraction": 0.06605148130160272,
+   "share_of_partial": 0.14107883817427386,
+   "total_coverage": 0.0964,
+   "n_partial_points": 1928
+  },
+  {
+   "tilt_deg": 90,
+   "condition": "Per-part",
+   "part": "body",
+   "visible_fraction": 0.10426898375519456,
+   "share_of_partial": 0.8470588235294118,
+   "total_coverage": 0.09775,
+   "n_partial_points": 1955
+  },
+  {
+   "tilt_deg": 90,
+   "condition": "Per-part",
+   "part": "lid",
+   "visible_fraction": 0.07260806216610005,
+   "share_of_partial": 0.15294117647058825,
+   "total_coverage": 0.09775,
+   "n_partial_points": 1955
+  },
+  {
+   "tilt_deg": 90,
+   "condition": "Per-part + trans.",
+   "part": "body",
+   "visible_fraction": 0.20205263820677496,
+   "share_of_partial": 0.9147662485746865,
+   "total_coverage": 0.1754,
+   "n_partial_points": 3508
+  },
+  {
+   "tilt_deg": 90,
+   "condition": "Per-part + trans.",
+   "part": "lid",
+   "visible_fraction": 0.07260806216610005,
+   "share_of_partial": 0.08523375142531357,
+   "total_coverage": 0.1754,
+   "n_partial_points": 3508
+  },
+  {
+   "tilt_deg": 90,
+   "condition": "+ trans., measured loss",
+   "part": "body",
+   "visible_fraction": 0.20205263820677496,
+   "share_of_partial": 0.9147662485746865,
+   "total_coverage": 0.1754,
+   "n_partial_points": 3508
+  },
+  {
+   "tilt_deg": 90,
+   "condition": "+ trans., measured loss",
+   "part": "lid",
+   "visible_fraction": 0.07260806216610005,
+   "share_of_partial": 0.08523375142531357,
+   "total_coverage": 0.1754,
+   "n_partial_points": 3508
+  }
+ ],
+ "iwr_validation": [
+  {
+   "sheet": "plastic",
+   "measured_reflect": -8.983863933096927,
+   "measured_reflect_err": 0.04703593682249618,
+   "measured_transmit": -2.822156209349828,
+   "measured_transmit_err": 0.2822156209349771,
+   "thick_reflect": -12.599530138852774,
+   "thick_transmit": -0.981992971407692,
+   "thin_reflect": -7.77,
+   "thin_reflect_range": [
+    -11.03,
+    -7.14
+   ],
+   "thin_transmit": -3.1,
+   "thin_transmit_range": [
+    -3.14,
+    -0.83
+   ],
+   "eps": 2.6,
+   "tan_delta": 0.02,
+   "thickness_mm": 3.0
+  },
+  {
+   "sheet": "glass",
+   "measured_reflect": -8.70164831216195,
+   "measured_reflect_err": 0.04703593682249618,
+   "measured_transmit": -5.550240545054649,
+   "measured_transmit_err": 0.2822156209349771,
+   "thick_reflect": -7.530794228874193,
+   "thick_transmit": -3.374963970397766,
+   "thin_reflect": -8.15,
+   "thin_reflect_range": [
+    -13.47,
+    -3.19
+   ],
+   "thin_transmit": -5.94,
+   "thin_transmit_range": [
+    -8.67,
+    -0.39
+   ],
+   "eps": 6.0,
+   "tan_delta": 0.025,
+   "thickness_mm": 4.0
+  }
+ ]
+}

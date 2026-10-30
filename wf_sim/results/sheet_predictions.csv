@@ -1,0 +1,5 @@
+material,eps,thickness_mm,tan_delta,halfspace_R0_dB,sheet_R_dB,sheet_R_min_dB,sheet_R_max_dB,sheet_two_way_transmission_dB
+glass,6.0,4.0,0.0,-7.53,-6.97,-19.55,-3.99,-1.85
+glass,6.0,4.0,0.01,-7.53,-7.6,-18.5,-4.58,-3.52
+acrylic,2.6,3.0,0.0,-12.6,-7.18,-7.51,-7.04,-1.85
+acrylic,2.6,3.0,0.01,-12.6,-7.48,-7.82,-7.34,-2.47

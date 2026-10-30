@@ -1,0 +1,6 @@
+material,eps,R0_linear,R0_dB,brewster_deg,one_way_interface_loss_dB,cutoff_deg_thr-15dB,cutoff_deg_thr-20dB,cutoff_deg_thr-25dB
+metal,PEC,1.0,0.0,,,14.9,17.2,19.2
+glass,6.0,0.1766,-7.53,67.8,-0.84,10.5,13.6,16.0
+PET,3.0,0.0718,-11.44,60.0,-0.32,7.2,11.2,14.1
+PP,2.3,0.0421,-13.75,56.6,-0.19,4.3,9.6,12.9
+acrylic,2.6,0.055,-12.6,58.2,-0.25,5.9,10.4,13.5

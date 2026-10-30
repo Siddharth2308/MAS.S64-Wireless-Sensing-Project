@@ -1,0 +1,26 @@
+# --- Third-party repos cloned for reference (they have their own .git) ---
+# Re-clone with:
+#   git clone git@github.com:signalkinetics/MITO_Codebase.git
+#   git clone git@github.com:signalkinetics/mmNorm.git
+#   git clone https://huggingface.co/datasets/SignalKinetics/MITO_Dataset
+MITO_Codebase/
+MITO_Dataset/
+mmNorm/
+
+# Raw Hugging Face download; the meshes we use are copied into wf_sim/meshes/
+ycb_download/
+
+# Vendor PDFs (TI user guide etc.): copyrighted, download from ti.com
+Datasheets/
+
+# Duplicate photo copies ("name (1).jpg")
+Images/* (*).*
+
+# --- OS / editors ---
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+*~
+.vscode/
+.idea/
