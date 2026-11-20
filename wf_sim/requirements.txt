@@ -1,0 +1,10 @@
+numpy
+scipy
+trimesh
+matplotlib
+pandas
+pytest
+rtree
+pyserial
+huggingface_hub
+# optional, about 10x faster ray casting: pip install embreex

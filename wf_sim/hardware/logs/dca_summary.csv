@@ -1,0 +1,14 @@
+time,label,file,frames,complete,max_adc,clip_pct,peak_db,peak_cm,peak_bin,floor_db,rx_peak_bins,level_std_db,phase_std_deg,phase_std_um,phase_range_deg
+2026-11-19T19:31:28,test_plate_40,C:\dca\test_plate_40\adc_data.bin,20,True,181,0.0,34.34,49.0,12,-0.21,11 12 12 11,0.03,0.17,0.9,0.73
+2026-11-19T19:42:07,E0_empty_20f,hardware\data\dca\E0_empty_20f\adc_data.bin,20,True,110,0.0,8.33,147.1,36,-0.1,36 36 36 36,0.446,4.49,23.6,16.62
+2026-11-19T19:47:30,E0_empty,hardware\data\dca\E0_empty\adc_data.bin,20,True,107,0.0,8.3,147.1,36,0.0,36 36 36 36,0.615,4.1,21.5,16.95
+2026-11-19T20:02:30,E1_plate_40,hardware\data\dca\E1_plate_40\adc_data.bin,100,True,167,0.0,34.7,49.0,12,-0.06,12 12 12 11,0.022,0.2,1.1,1.31
+2026-11-19T20:16:55,E1_plate_60,hardware\data\dca\E1_plate_60\adc_data.bin,100,True,162,0.0,34.59,65.4,16,0.1,16 17 16 16,0.025,0.97,5.1,9.39
+2026-11-19T20:28:13,E2_still,hardware\data\dca\E2_still\adc_data.bin,600,True,193,0.0,34.43,49.0,12,-0.05,11 12 12 11,0.028,0.18,0.9,0.99
+2026-11-19T20:35:45,E3_before,hardware\data\dca\E3_before\adc_data.bin,100,True,188,0.0,34.47,49.0,12,0.01,11 12 12 11,0.023,0.17,0.9,0.69
+2026-11-19T20:41:25,E3_after,hardware\data\dca\E3_after\adc_data.bin,100,True,199,0.0,36.02,49.0,12,-0.08,11 12 12 11,0.024,0.44,2.3,1.65
+2026-11-19T20:55:53,E4_bo18,hardware\data\dca\E4_bo18\adc_data.bin,100,True,196,0.0,36.02,49.0,12,-0.06,11 12 12 11,0.021,0.14,0.8,0.69
+2026-11-19T20:55:55,E4_bo0,hardware\data\dca\E4_bo0\adc_data.bin,100,True,5022,0.0,64.43,49.0,12,18.67,11 12 12 11,0.009,0.06,0.3,0.37
+2026-11-19T20:55:57,E4_bo6,hardware\data\dca\E4_bo6\adc_data.bin,100,True,2207,0.0,57.78,49.0,12,12.45,11 12 12 11,0.011,0.18,0.9,0.79
+2026-11-19T20:55:59,E4_bo12,hardware\data\dca\E4_bo12\adc_data.bin,100,True,1049,0.0,51.32,49.0,12,6.96,11 12 12 11,0.016,0.09,0.5,0.51
+2026-11-19T21:02:14,E4_bo18end,hardware\data\dca\E4_bo18end\adc_data.bin,100,True,203,0.0,36.03,49.0,12,-0.09,11 12 12 11,0.022,0.12,0.7,0.64

@@ -1,0 +1,105 @@
+id,object,category,part,material,wall_mm,area_share,contents,confidence,note,validated
+001,chips_can,food,tube wall,cardboard,3.5,0.8,chips (unknown if present),medium,spiral paperboard; check for Al foil liner inside (would look like metal),yes
+001,chips_can,food,bottom,steel,0.2,0.1,,medium,metal end,yes
+001,chips_can,food,lid,plastic_thin,1,0.1,,high,LDPE snap lid,yes
+002,master_chef_can,food,body,steel,0.2,0.85,coffee (hidden by metal),high,paper label ignored,yes
+002,master_chef_can,food,lid,plastic_thin,1,0.15,,medium,check if lid is plastic or metal,yes
+003,cracker_box,food,box,cardboard,0.5,1.0,crackers in plastic bag (unknown if present),high,,yes
+004,sugar_box,food,box,cardboard,0.5,1.0,sugar (unknown if present),high,,yes
+005,tomato_soup_can,food,body,steel,0.2,1.0,soup (hidden by metal),high,paper label ignored,yes
+006,mustard_bottle,food,body,plastic_thin,1,0.9,mustard (unknown if present),high,squeeze bottle (HDPE/LDPE),yes
+006,mustard_bottle,food,cap,plastic_solid,2,0.1,,high,PP cap,yes
+007,tuna_fish_can,food,body,steel,0.2,1.0,tuna (hidden by metal),high,may be aluminium; same for radar,yes
+008,pudding_box,food,box,cardboard,0.5,1.0,mix packet (unknown if present),high,,yes
+009,gelatin_box,food,box,cardboard,0.5,1.0,mix packet (unknown if present),high,,yes
+010,potted_meat_can,food,body,steel,0.2,1.0,meat (hidden by metal),high,may be aluminium,yes
+011,banana,food,body,plastic_thin,1.5,1.0,hollow,high,YCB fruits believed to be plastic replicas: check,yes
+012,strawberry,food,body,plastic_thin,1.5,1.0,hollow,high,plastic replica,yes
+013,apple,food,body,plastic_thin,1.5,1.0,hollow,high,plastic replica? check,yes
+014,lemon,food,body,plastic_thin,1.5,1.0,hollow,high,plastic replica,yes
+015,peach,food,body,plastic_thin,1.5,1.0,hollow,medium,plastic replica,yes
+016,pear,food,body,plastic_thin,1.5,1.0,hollow,medium,plastic replica? check,yes
+017,orange,food,body,plastic_thin,1.5,1.0,hollow,medium,plastic replica? check,yes
+018,plum,food,body,plastic_thin,1.5,1.0,hollow,high,plastic replica,yes
+019,pitcher_base,kitchen,body,plastic_solid,2,1.0,empty,high,PP pitcher,yes
+021,bleach_cleanser,kitchen,body,plastic_thin,1,0.9,cleanser (unknown if present),high,HDPE bottle,yes
+021,bleach_cleanser,kitchen,cap,plastic_solid,2,0.1,,high,PP cap,yes
+022,windex_bottle,kitchen,body,plastic_thin,0.5,0.75,liquid (unknown if present),high,PET bottle,yes
+022,windex_bottle,kitchen,sprayer,plastic_solid,2,0.25,,high,PP trigger; small steel spring inside,yes
+023,wine_glass,kitchen,body,glass,2,1.0,empty,high,may be plastic (PC/acrylic) or real glass: check- glass,yes
+024,bowl,kitchen,body,plastic_solid,2,1.0,empty,high,believed red plastic: check,yes
+025,mug,kitchen,body,plastic_solid,3,1.0,empty,high,believed plastic; could be ceramic: check,yes
+026,sponge,kitchen,body,foam,20,0.8,,high,polyurethane foam,yes
+026,sponge,kitchen,scrub pad,fabric,5,0.2,,medium,abrasive fibre pad,yes
+027,skillet,kitchen,pan,aluminium,3,0.8,,high,non-stick coating ignored,yes
+027,skillet,kitchen,handle,plastic_solid,5,0.2,,high,check handle material,yes
+027,skillet,kitchen,cap,glass,3,,,high,glass,yes
+027,skillet,kitchen,handle,plastic_solid,6,,,high,,yes
+028,skillet_lid,kitchen,lid,glass,4,0.85,,low,glass lid? check,no
+028,skillet_lid,kitchen,rim,steel,0.5,0.05,,low,metal rim,no
+028,skillet_lid,kitchen,knob,plastic_solid,10,0.1,,low,,no
+029,plate,kitchen,body,ceramic,2,1.0,,high,believed red plastic: check,yes
+030,fork,kitchen,body lower,plastic_solid,2,0.6,,high,bottom part plastic,yes
+030,fork,kitchen,body upper,steel,2,0.4,,high,top part steel,yes
+031,spoon,kitchen,body lower,plastic_solid,2,0.6,,high,plastic,yes
+031,spoon,kitchen,body upper,steel,2,0.4,,high,steel,yes
+032,knife,kitchen,body lower,plastic_solid,2,0.6,,high,plastic,yes
+032,knife,kitchen,body upper,steel,2,0.4,,high,steel or allu,yes
+033,spatula,kitchen,head,plastic_solid,2,0.6,,high,,yes
+033,spatula,kitchen,handle,plastic_solid,8,0.4,,high,,yes
+035,power_drill,tools,housing,plastic_solid,2.5,0.75,,high,ABS shell,yes
+035,power_drill,tools,chuck,steel,solid,0.1,,high,,yes
+035,power_drill,tools,motor and battery,steel,solid,0.15,,high,inside the shell; visible through thin plastic,yes
+037,scissors,tools,blades,steel,solid,0.5,,high,,yes
+037,scissors,tools,handles,plastic_solid,4,0.5,,high,,yes
+038,padlock,tools,body,steel,solid,0.85,,high,may be brass; same for radar,yes
+038,padlock,tools,shackle,steel,solid,0.15,,high,,yes
+039,key,tools,body,steel,solid,1.0,,high,may be brass,yes
+040,large_marker,tools,body,plastic_thin,1,0.85,ink reservoir,high,,yes
+040,large_marker,tools,cap,plastic_solid,1.5,0.15,,high,,yes
+041,small_marker,tools,body,plastic_thin,1,0.85,ink reservoir,high,,yes
+041,small_marker,tools,cap,plastic_solid,1.5,0.15,,high,,yes
+042,wrench,tools,body,steel,solid,1.0,,high,,yes
+043,phillips_screwdriver,tools,shaft,steel,solid,0.3,,high,,yes
+043,phillips_screwdriver,tools,handle,plastic_solid,10,0.7,,high,,yes
+044,flat_screwdriver,tools,shaft,steel,solid,0.3,,high,,yes
+044,flat_screwdriver,tools,handle,plastic_solid,10,0.7,,high,,yes
+046,plastic_bolt,tools,body,plastic_solid,10,1.0,,high,toy bolt,yes
+047,plastic_nut,tools,body,plastic_solid,10,1.0,,high,toy nut,yes
+048,hammer,tools,head,steel,solid,0.35,,high,,yes
+048,hammer,tools,handle,wood,25,0.65,,low,wood or fibreglass/rubber grip? check,yes
+049,small_clamp,tools,body,plastic_solid,3,0.9,,high,spring clamp,yes
+049,small_clamp,tools,spring,steel,solid,0.1,,high,,yes
+050,medium_clamp,tools,body,plastic_solid,3,0.9,,high,spring clamp,yes
+050,medium_clamp,tools,spring,steel,solid,0.1,,high,,yes
+051,large_clamp,tools,body,plastic_solid,4,0.85,,high,spring or bar clamp? check,yes
+051,large_clamp,tools,metal parts,steel,solid,0.15,,high,,yes
+052,extra_large_clamp,tools,body,plastic_solid,4,0.8,,high,check type,yes
+052,extra_large_clamp,tools,metal parts,steel,solid,0.2,,high,,yes
+053,mini_soccer_ball,toys,cover,rubber,2,1.0,air,high,PVC/synthetic leather panels,yes
+054,softball,toys,cover,leather,2,1.0,cork/polyurethane core,high,,yes
+055,baseball,toys,cover,leather,2,1.0,cork/rubber core + yarn,high,,yes
+056,tennis_ball,toys,shell,rubber,3,1.0,air,high,felt cover ignored,yes
+057,racquetball,toys,shell,rubber,3,1.0,air,high,,yes
+058,golf_ball,toys,body,rubber,solid,1.0,,high,ionomer cover + rubber core,yes
+061,foam_brick,toys,body,foam,solid,1.0,,high,,yes
+062,dice,toys,body,plastic_solid,solid,1.0,,high,plastic,yes
+063,marbles,toys,body,glass,solid,1.0,,high,,yes
+065a,cups_a,toys,body,plastic_thin,1,1.0,empty,high,stacking cup,yes
+065b,cups_b,toys,body,plastic_thin,1,1.0,empty,high,stacking cup,yes
+065c,cups_c,toys,body,plastic_thin,1,1.0,empty,high,stacking cup,yes
+065d,cups_d,toys,body,plastic_thin,1,1.0,empty,high,stacking cup,yes
+065e,cups_e,toys,body,plastic_thin,1,1.0,empty,high,stacking cup,yes
+065f,cups_f,toys,body,plastic_thin,1,1.0,empty,high,stacking cup,yes
+065g,cups_g,toys,body,plastic_thin,1,1.0,empty,high,stacking cup,yes
+065h,cups_h,toys,body,plastic_thin,1,1.0,empty,high,stacking cup,yes
+065i,cups_i,toys,body,plastic_thin,1,1.0,empty,high,stacking cup,yes
+065j,cups_j,toys,body,plastic_thin,1,1.0,empty,high,stacking cup,yes
+070,colored_wood_blocks,toys,blocks,wood,solid,1.0,,high,painted wood,yes
+070,colored_wood_blocks,toys,container,plastic_thin,0.5,,,high,,yes
+071,nine_hole_peg_test,toys,board,wood,10,0.8,,high,wood,yes
+071,nine_hole_peg_test,toys,pegs,wood,solid,0.2,,high,,yes
+072,toy_airplane,toys,body,plastic_solid,2,1.0,,medium,assembly toy; check for metal screws,yes
+076,timer,kitchen,housing,plastic_solid,2,0.8,,high,kitchen timer,yes
+076,timer,kitchen,mechanism,steel,solid,0.2,,high,inside; mechanical or electronic? check,yes
+077,rubiks_cube,toys,body,plastic_solid,solid,1.0,,high,ABS,yes

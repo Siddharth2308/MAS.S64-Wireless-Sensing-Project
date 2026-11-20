@@ -6,7 +6,7 @@
 MITO_Codebase/
 MITO_Dataset/
 mmNorm/
-
+mmRender
 # Raw Hugging Face download; the meshes we use are copied into wf_sim/meshes/
 ycb_download/
 
@@ -24,3 +24,6 @@ Thumbs.db
 *~
 .vscode/
 .idea/
+
+# Processed MITO images downloaded for the sim-vs-real comparison
+mito_download/

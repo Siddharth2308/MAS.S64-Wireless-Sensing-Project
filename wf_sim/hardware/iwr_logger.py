@@ -12,6 +12,7 @@ segment to hardware/data/session_<time>/.
 """
 import argparse
 import json
+import os
 import threading
 import time
 from datetime import datetime
@@ -19,6 +20,7 @@ from pathlib import Path
 
 import numpy as np
 import serial
+from serial.tools import list_ports
 
 from hardware import tlv
 
@@ -73,10 +75,29 @@ def check_cfg(cfg_text):
                              "targets like our plate. Set its last field to 0.")
 
 
+def pick_ports(ports):
+    """(config, data) ports from the XDS110 names Windows reports, or None."""
+    cli = next((p.device for p in ports if "Application/User UART" in p.description), None)
+    data = next((p.device for p in ports if "Auxiliary Data Port" in p.description), None)
+    return (cli, data) if cli and data else None
+
+
+def resolve_ports(args):
+    """Fill in ports not given on the command line."""
+    if args.cli and args.data:
+        return
+    found = pick_ports(list_ports.comports())
+    if not found and os.name == "nt":
+        raise SystemExit("XDS110 ports not found (see debug.md), or pass --cli COMx --data COMy")
+    cli, data = found or ("/dev/ttyACM0", "/dev/ttyACM1")
+    args.cli, args.data = args.cli or cli, args.data or data
+
+
 def open_ports(args):
+    resolve_ports(args)
     cli = serial.Serial(args.cli, 115200, timeout=0.05)
     data = serial.Serial(args.data, 921600, timeout=0.05)
-    cfg_text = Path(args.cfg).read_text()
+    cfg_text = Path(args.cfg).read_text(encoding="utf-8")
     check_cfg(cfg_text)
     send_cfg(cli, cfg_text)
     return cli, data, cfg_text
@@ -159,7 +180,7 @@ def cmd_session(args):
     log_path = HERE / "logs" / f"session_{stamp}.txt"
     seg_dir = HERE / "data" / f"session_{stamp}"
     log_path.parent.mkdir(parents=True, exist_ok=True)
-    log = open(log_path, "w", buffering=1)
+    log = open(log_path, "w", buffering=1, encoding="utf-8")
     lock = threading.Lock()
     t0 = time.time()
     st = dict(mode="idle", rng=None, frames=[], error=None, stop=False, last_idle=0.0)
@@ -247,8 +268,8 @@ def cmd_session(args):
 def main():
     ap = argparse.ArgumentParser(description=__doc__,
                                  formatter_class=argparse.RawDescriptionHelpFormatter)
-    ap.add_argument("--cli", default="/dev/ttyACM0", help="config/CLI port (115200 baud)")
-    ap.add_argument("--data", default="/dev/ttyACM1", help="data port (921600 baud)")
+    ap.add_argument("--cli", help="config/CLI port, 115200 baud (default: auto-detect)")
+    ap.add_argument("--data", help="data port, 921600 baud (default: auto-detect)")
     ap.add_argument("--cfg", default=str(DEFAULT_CFG))
     ap.add_argument("--rmin", type=float, default=0.25, help="peak search window (m)")
     ap.add_argument("--rmax", type=float, default=0.60)

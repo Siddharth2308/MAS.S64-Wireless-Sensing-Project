@@ -1,0 +1,60 @@
+Progress Report 1: Material-Aware and Orientation-Robust Wave-Former
+Siddharth Kulkarni, Ivan Wren
+MAS.S64 Wireless Sensing and Physical AI, October 30, 2026
+
+
+1. Background and Motivation
+
+At 77 GHz most surfaces reflect specularly, so a radar only sees the parts of an object that face back towards it. Wave-Former (Dodds et al.) completes the full 3D shape from this partial view, and it is trained entirely on synthetic partial point clouds: radar-facing points are kept, angle cutoffs are randomized to mimic different materials, and noise is added. Our two proposals question this training data. Proposal A argues that one random cutoff per object cannot represent objects made of several materials, such as a glass jar with a metal lid, where one part blocks the signal and the other lets it through. Proposal B argues that the training and evaluation data are biased towards upright objects (102 of about 136 real captures in the MITO evaluation set are at the canonical pose). Since we do not have Wave-Former's code yet, our first step was to rebuild the data generation from first principles and test its physics with real radar measurements before using it for either proposal.
+
+
+2. Progress Made
+
+[Insert Figure 1: wf_sim/figs/pipeline_diagram.png]
+Figure 1. Our simplified partial point cloud simulator, built from the paper's description (not Wave-Former's code), with the steps changed for Proposal A (materials) and B (orientation). The completion network (grey) is not reproduced.
+
+Simulator. We built a geometric simulator of the training-data stage. A synthetic aperture of 31 x 23 radar positions (60 x 45 cm, 40 cm above the object) is placed over a mesh, and a surface point is detected if its normal points within a cutoff angle of some radar position and the path is not blocked. Instead of a random cutoff, we derive it from physics: the Fresnel reflectivity of the material at normal incidence sets how much signal margin it has above a detection threshold, giving about 17 degrees for metal, 14 for glass and 10 to 11 for plastics. Each part of an object can have its own material, and glass and plastic parts can optionally transmit the signal with a loss while metal always blocks. Objects can also be rotated while keeping the same surface samples, so we can measure which part of the surface is seen at each pose. We tested it on four procedural objects and five real YCB meshes from the MITO dataset.
+
+Hardware. These material values came from textbook physics, so we used an IWR1443BOOST radar to test them. Without a DCA1000 capture board we have no raw data or SAR imaging, so we used the range profile (signal strength versus distance) computed on the chip by TI's demo firmware, and wrote our own logger to record labelled measurements.
+
+Methodology. The radar was mounted upright on a stand, pointing horizontally into open space, using a configuration exported from TI's Visualizer (4.4 cm range resolution, 10 frames per second, static clutter removal off). Each measurement was a 3 to 5 second recording (30 to 300 frames), and the value we report is the median signal level in the range bin of the target, in dB relative to a metal reference measured in the same session. Targets were leaned on a box at the radar's height instead of being held, and before each recording they were turned slightly until the live peak was highest, so that they faced the radar squarely. We ran five sessions, each building on the previous one:
+- Sanity check: a metal plate at 30, 40 and 50 cm, to confirm the logger reads distance and signal level correctly.
+- Linearity check: a 22.5 x 39 cm, 6 mm aluminium plate from 40 to 120 cm, plus an empty-scene recording for the background.
+- Power test: the plate fixed at 40 cm while the transmit power was lowered in 6 dB steps (0 to 18 dB back-off), to find a setting below the receiver's saturation.
+- Reflectivity: the aluminium plate, a 3 mm plastic sheet and a 4 mm glass sheet (both 30.5 x 30.5 cm) placed one at a time with their front face at 40 cm, plus an empty scene, with the aluminium measured again at the end to check drift.
+- Transmission: the aluminium plate fixed at 60 cm, with each sheet placed one at a time at 40 cm between it and the radar; the loss is the drop in the plate's level compared with plate-only recordings taken before and after.
+The last two sessions used the reduced transmit power (18 dB back-off). The readings were stable to within 0.1 dB between frames and drifted 0.1 to 0.6 dB over a session.
+
+[Insert Figure 2: wf_sim/figs/setup_photos.png]
+Figure 2. Setup: (a) IWR1443BOOST, (b) bring-up with TI's Visualizer, (c) samples, (d) distance test, (e) reflectivity test with a sheet at 40 cm, (f) transmission test with a sheet at 40 cm in front of the aluminium plate at 60 cm.
+
+
+3. Initial Results
+
+[Insert Figure 3: wf_sim/figs/iwr_validation.png]
+Figure 3. IWR1443BOOST measurements (black) against the simulator's thick-material assumption (orange) and a thin-sheet model with small absorption (blue): (a) reflectivity relative to aluminium, (b) two-way transmission.
+
+Reflectivity. The plastic and glass sheets reflected almost equally, -9.0 and -8.7 dB relative to aluminium. Our simulator, which like the textbook formula treats each material as infinitely thick, predicted 5 dB between them (-12.6 for acrylic, -7.5 for glass). At 77 GHz these sheets are only a few wavelengths thick, so the reflections from their front and back faces interfere. A thin-sheet model that includes this predicts about -8 dB for both, which matches. This result compares two materials at the same radar setting, so it does not depend on the absolute calibration discussed below.
+
+Transmission. The aluminium plate lost 2.8 dB through the plastic and 5.6 dB through the glass, so about half and a quarter of the power still gets through and back. This confirms that glass and plastic let the radar through while metal blocks it, which is the main mechanism behind Proposal A. The simulator underestimated both losses (1.0 and 3.4 dB) because it ignored absorption, and the thin-sheet model with a small loss tangent matches (3.1 and 5.9 dB). We added this model to the simulator. With the measured loss, the simulated glass jar lying on its side still shows twice as much of its body when transmission is on (10.4 to 20.2 percent), because the inner wall that becomes visible faces the radar directly.
+
+What we learned for Proposal A. A wall's radar brightness and how much it lets through depend on its thickness and absorption as much as on the material, so per-part materials in the training data need a thickness and a loss, not just a label. The simulation also showed that giving parts different cutoff angles on its own changes little; whether a part blocks or transmits matters much more.
+
+Orientation (Proposal B). In simulation, the visible area of tall objects barely changes within 30 degrees of tilt (3.6 to 6.5 percent for the bleach bottle), but the visible region does: at 30 degrees only 39 percent of it overlaps with the upright view for the bleach and mustard bottles (Figure 4). Beyond 40 degrees coverage jumps, from 4 to 28 percent for the bleach bottle lying down, so upright is close to the worst case. Rotation about the vertical axis alone barely matters, so the planned turntable experiment needs to include tilt.
+
+[Insert Figure 4: wf_sim/figs/orientation_heatmap_021_bleach_cleanser.png]
+Figure 4. Bleach bottle in our simplified simulator over 168 poses: (a) visible area, (b) overlap of the visible surface with the upright view.
+
+What did not work. The radar receiver saturated on the metal plate: it read about 139 dB at every distance from 40 to 120 cm, where it should have dropped by at least 9.5 dB. We only noticed this because we tested several distances. Reducing the transmit power by 18 dB lowered the readings by only about 7 dB, so the absolute dB scale is still uncalibrated and we rely only on comparisons made at the same setting.
+
+
+4. Outstanding Challenges
+
+All our results concern Wave-Former's input, not its output; without its code or checkpoint we cannot yet show that these input changes increase reconstruction error. Without the capture board we cannot make SAR images or real partial point clouds, so real-object tests need time on the lab's robot-arm setup. Two simulator assumptions are still untested: how fast a reflection fades as a surface rotates away from the radar, and the absolute dB scale. Finally, we do not know how Wave-Former sets training orientations and cutoff ranges, which decides how large each gap really is.
+
+
+5. Next Steps and Timeline
+
+By November 20: add wall thickness and loss per part to the simulator and rerun the experiments; measure the angular falloff with a 3D-printed turntable and a same-size metal reference, calibrate the dB scale with a small target, and add more materials (PET bottle, PP container); run Wave-Former (or, if unavailable, a small PoinTr baseline) on our simulated data for upright versus tilted objects and uniform versus per-part materials to get first reconstruction-quality numbers.
+
+By December 7: retrain with per-part materials and transmission (A) and with randomized orientations including large tilts (B), compare with the original training data, test on real objects if lab access allows, and present.
