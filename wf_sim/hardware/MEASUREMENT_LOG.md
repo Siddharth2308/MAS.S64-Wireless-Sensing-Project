@@ -485,6 +485,9 @@ across the band ± sd). Script plot: [`logs/dca_materials.png`](logs/dca_materia
 - [x] Experiment B: aluminium plate at 60 cm behind each sheet at 40 cm (Session 5)
 - [ ] Identify the opaque plastic (marking or source)
 - [x] DCA1000 raw capture working (Session 6)
-- [ ] DCA: E0–E4, then E5 (new samples: glass, acrylic, epoxy glass 3 mm; glass + acrylic ~6–7 mm; calipers)
-- [ ] DCA range offset (46–49 cm read for ~40 cm): check with E1 at 60 cm
+- [x] DCA: E0–E4, then E5 Part 1 (Session 6, Nov 19)
+- [ ] E5: caliper thicknesses; Part 2 (transmission, optional); `none` background captures
+- [ ] 2-material flat surface (plastic in front of metal)
+- [x] DCA range offset: constant +7.2 cm at 40 and 60 cm (E1)
+- [ ] E1: level flat 40 → 60 cm; IF high-pass hypothesis not tested
 - [ ] Back up `hardware/` (not under version control)

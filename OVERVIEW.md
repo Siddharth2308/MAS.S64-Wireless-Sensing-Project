@@ -1,6 +1,6 @@
 # Project overview
 
-**Status: Nov 12, 2026.** MAS.S64, Siddharth Kulkarni and Ivan Wren.
+**Status: Nov 20, 2026.** MAS.S64, Siddharth Kulkarni and Ivan Wren.
 
 ## The idea
 - Wave-Former completes 3D object shapes from mmWave radar. It trains only on synthetic partial point clouds.
@@ -15,10 +15,22 @@
 
 ## What we observed
 
-### Radar measurements (IWR1443BOOST, on-chip range profile)
+### Raw radar captures (DCA1000, Nov 19)
 | Test | Result | What it means |
 |---|---|---|
-| Reflection vs aluminium | 3 mm plastic -9.0 dB, 4 mm glass -8.7 dB. Thick-material model predicted -12.6 / -7.5 dB. | One sample each, no repeats, so this doesn't show they're the same. E5 tests it. |
+| E0: empty scene | Background at the plate position is 38 dB below the plate | The side wall doesn't matter |
+| E1: plate at 40 vs 60 cm | Range offset +7.2 cm (constant); level nearly flat | Likely the chip's IF high-pass filters (hypothesis), not saturation |
+| E2: 60 s still | Phase sd 0.18° (0.9 µm) | Stable enough for SAR |
+| E3: move plate ~1 mm | Phase moves as expected (0.91 mm) | Phase tracks real motion |
+| E4: TX back-off 0-18 dB | Linear for 0-12 dB (-6.5 dB per 6 dB); bo18 ~9 dB low | On-chip demo compressed dB. Use bo6. |
+| E5: reflection vs aluminium, 5 re-placements | 3 mm glass -11.9 ± 2.2, 3 mm acrylic -6.7 ± 1.7, 3 mm epoxy glass -6.7 ± 1.6, 6 mm glass -8.0 ± 1.0, 7 mm acrylic -21.9 ± 3.9 dB | Glass ≠ acrylic at 3 mm (5.2 dB, p = 0.004), but one capture's level can't tell them apart; frequency shape can (post-hoc). Thickness matters as much as material. |
+
+Details: `wf_sim/hardware/MEASUREMENT_LOG.md` Session 6.
+
+### Radar measurements (IWR1443BOOST, on-chip range profile, earlier)
+| Test | Result | What it means |
+|---|---|---|
+| Reflection vs aluminium | 3 mm plastic -9.0 dB, 4 mm glass -8.7 dB | Superseded by E5: the on-chip dB was compressed (E4) |
 | Two-way transmission | Plastic -2.8 dB, glass -5.6 dB. Simulator assumed -1.0 / -3.4 dB. | Both pass much of the signal, but lose more than we modelled. A thin-sheet model with small absorption gives -3.1 / -5.9 dB. |
 | Metal plate from 40 to 120 cm | About 139 dB at every distance | The receiver saturates at full power. |
 | 18 dB TX back-off | Readings fell only about 7 dB | The absolute dB scale is uncalibrated. |
@@ -36,8 +48,10 @@ Also, 102 of about 136 real MITO capture poses are upright, so real-world testin
 ## How far to trust this
 - **Biggest gap:** nothing yet shows these input changes hurt reconstruction.
 - **dB values:** the values vs metal could change once the scale is calibrated.
-- **Glass vs plastic:** the 0.3 dB gap is smaller than we can trust until we measure how repeatable re-placing a sheet is.
-- **Thin-sheet model:** close to the one plastic reading, but that isn't a validation. For glass, the prediction swings about ±5 dB with permittivity.
+- **E5 placement noise:** re-placing a sheet moves its level by 1-2 dB sd (aluminium 0.6 dB). Treat ±2 dB as the uncertainty.
+- **E5 thicknesses:** nominal, not measured with calipers. Only straight-on, one distance, relative to aluminium.
+- **Thin-sheet model:** within 1-2 dB of the 3 mm means with textbook εr, but misses 7 mm acrylic (-16.6 vs -21.9 dB, near a null). Not fitted.
+- **Material labels:** from photos; wall thickness estimated.
 - **Metal blocking:** assumed in the simulator, not measured.
 - **Coverage percentages:** our cutoffs (10-17°) are looser than MITO's 5°, so trust the trends, not the exact values.
 - **Samples:** one sheet per material, at one angle. The plastic's identity is unconfirmed.
@@ -45,18 +59,18 @@ Also, 102 of about 136 real MITO capture poses are upright, so real-world testin
 ## What we're doing next
 | Step | Why | Status |
 |---|---|---|
-| **E0-E2:** raw capture checks with the DCA1000 | Confirm the data is correct and the phase is stable | Scripts ready, no captures yet |
-| **E3:** move the plate 1 mm | Check that phase tracks real motion, which SAR imaging depends on | Not started |
-| **E4:** redo the power test on raw data | Settle the saturation and dB-scale question | Not started |
-| **E5:** repeated reflection captures: glass, plastic, metal, brushed-metal control | Find out if we can tell materials apart, and how repeatable the readings are | Not started |
-| **Multi-material analysis (Ivan)** | Do multi-material objects reconstruct worse in Wave-Former? Label MITO objects by material | Not started |
+| **E0-E4:** raw capture checks with the DCA1000 | Data correct, phase stable, dB scale | **Done** (Nov 19) |
+| **E5 Part 1:** repeated reflection captures | Tell materials apart, repeatability | **Done** (Nov 19). Part 2 (transmission) skipped; calipers not done |
+| **YCB material labels** | Per-part materials for the 72 YCB objects in mmRender | **Done** (Nov 20): `wf_sim/materials/` |
+| **mmRender material term (Ivan)** | Per-point reflectivity from labels; compare rendered vs real (MITO) images | Planned. Needs `material_reflectivity.csv` |
+| **2-material flat surfaces** | Plastic in front of metal, as staff suggested | Not started |
+| **Multi-material analysis (Ivan)** | Do multi-material objects reconstruct worse in Wave-Former? | Not started |
 | **Get reconstruction numbers** | Close the biggest gap. Ask staff for the Wave-Former checkpoint, otherwise train a small PoinTr baseline. | Not started |
 | **SAR imaging:** MITO's sample raw data, then real objects | Compare real partial views with simulation (bottle upright vs tilted, lidded jar) | Later, needs a scanner |
 
-**What E5 decides for Proposal A:**
-- **Materials separate, even across thicknesses:** measure per-part material values for the simulator.
-- **They separate only with known thickness:** calibrate per sheet and model thickness.
-- **Only metal vs non-metal separates:** narrow Proposal A to "blocks vs passes".
+**What E5 means for Proposal A:**
+- Materials separate on average, but thickness changes reflection as much as material does. So per-part simulation needs material **and** thickness, not a material name alone.
+- Acrylic and epoxy glass look the same; glass differs (level and frequency shape).
 
 ## Deadlines
 - **Nov 20:** presentation / Progress Report 2

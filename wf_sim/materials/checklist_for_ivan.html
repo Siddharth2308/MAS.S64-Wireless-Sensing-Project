@@ -1,0 +1,184 @@
+<title>YCB Label Handoff</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+<style>
+/* Layout: one reading column, lab-notebook checklist; facts up top, open checks below, plan last */
+:root {
+  --bg: #f5f7f8;
+  --surface: #ffffff;
+  --fg: #1b2328;
+  --muted: #5b6a73;
+  --line: #d9e0e4;
+  --accent: #0f6f73;
+  --accent-soft: #e1f0f0;
+  --warn: #9a5b00;
+  --warn-soft: #fbf0dc;
+  --metal: #55636c;
+  --font-body: "IBM Plex Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, "Cascadia Mono", Consolas, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #11171a; --surface: #182024; --fg: #e3e9ec; --muted: #94a3ab; --line: #2a353b;
+    --accent: #4fc0c2; --accent-soft: #163236; --warn: #e2a64a; --warn-soft: #33270f; --metal: #9fb0b9;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #11171a; --surface: #182024; --fg: #e3e9ec; --muted: #94a3ab; --line: #2a353b;
+  --accent: #4fc0c2; --accent-soft: #163236; --warn: #e2a64a; --warn-soft: #33270f; --metal: #9fb0b9;
+  color-scheme: dark;
+}
+body {
+  background: var(--bg); color: var(--fg); font-family: var(--font-body); font-size: 15px; line-height: 1.55;
+  padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px));
+  padding-block: 32px 56px;
+}
+main { max-width: 760px; margin: 0 auto; display: grid; gap: 28px; }
+header { display: grid; gap: 8px; }
+.eyebrow { font-family: var(--font-mono); font-size: 12px; letter-spacing: .06em; text-transform: uppercase; color: var(--accent); }
+h1 { font-size: 28px; font-weight: 600; line-height: 1.2; margin: 0; text-wrap: balance; }
+h2 { font-size: 17px; font-weight: 600; margin: 0 0 10px; text-wrap: balance; }
+p { margin: 0; max-width: 65ch; }
+.muted { color: var(--muted); }
+code { font-family: var(--font-mono); font-size: 13px; background: var(--accent-soft); color: var(--fg); padding: 1px 5px; border-radius: 4px; }
+section { display: grid; gap: 4px; }
+
+.facts { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 1px; background: var(--line); border: 1px solid var(--line); border-radius: 8px; overflow: hidden; }
+.fact { background: var(--surface); padding: 12px 14px; display: grid; gap: 2px; }
+.fact b { font-family: var(--font-mono); font-size: 22px; font-weight: 500; font-variant-numeric: tabular-nums; }
+.fact span { font-size: 13px; color: var(--muted); }
+@media (max-width: 560px) { .facts { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+
+.bars { display: grid; gap: 5px; margin-top: 4px; }
+.bar { display: grid; grid-template-columns: 110px minmax(0, 1fr) 28px; align-items: center; gap: 10px; font-size: 13px; }
+.bar .name { font-family: var(--font-mono); color: var(--muted); }
+.bar .track { height: 10px; background: var(--line); border-radius: 3px; overflow: hidden; }
+.bar .fill { height: 100%; background: var(--accent); }
+.bar .fill.metal { background: var(--metal); }
+.bar .n { font-family: var(--font-mono); font-variant-numeric: tabular-nums; text-align: right; }
+.legend { font-size: 12px; color: var(--muted); margin-top: 6px; }
+.sw { display: inline-block; width: 10px; height: 10px; border-radius: 2px; vertical-align: -1px; margin: 0 4px 0 10px; }
+
+.checks { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; }
+.checks li { background: var(--surface); border: 1px solid var(--line); border-radius: 8px; }
+.checks label { display: grid; grid-template-columns: 20px minmax(0, 1fr); gap: 10px; padding: 11px 14px; cursor: pointer; }
+.checks input { width: 17px; height: 17px; margin: 3px 0 0; accent-color: var(--accent); }
+.checks input:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.checks li:has(input:checked) { opacity: .6; }
+.checks li:has(input:checked) .txt strong { text-decoration: line-through; }
+.tag { display: inline-block; font-family: var(--font-mono); font-size: 11px; letter-spacing: .04em; text-transform: uppercase; padding: 1px 6px; border-radius: 4px; margin-left: 6px; vertical-align: 1px; background: var(--warn-soft); color: var(--warn); }
+
+table { border-collapse: collapse; width: 100%; font-size: 14px; }
+.tablewrap { overflow-x: auto; border: 1px solid var(--line); border-radius: 8px; background: var(--surface); }
+th, td { text-align: left; padding: 8px 12px; border-bottom: 1px solid var(--line); }
+tr:last-child td { border-bottom: 0; }
+th { font-size: 12px; font-weight: 500; color: var(--muted); text-transform: uppercase; letter-spacing: .05em; }
+td.num { font-family: var(--font-mono); font-variant-numeric: tabular-nums; white-space: nowrap; }
+.plan { display: grid; gap: 8px; background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: 14px 16px; }
+.plan div { display: grid; grid-template-columns: 82px minmax(0, 1fr); gap: 10px; }
+.plan dt { font-family: var(--font-mono); font-size: 12px; text-transform: uppercase; letter-spacing: .05em; color: var(--accent); padding-top: 2px; }
+.plan dd { margin: 0; }
+footer { font-size: 13px; color: var(--muted); }
+</style>
+
+<main>
+  <header>
+    <div class="eyebrow">MAS.S64 · Proposal A · Nov 20</div>
+    <h1>YCB material labels: handoff checklist</h1>
+    <p class="muted">For Ivan, with <code>wf_sim/materials/ycb_materials.csv</code>. One row per part. Same object IDs as mmRender's <code>generate_data/objs/ycb.csv</code>. Drafted from object type, then validated by Siddharth against real YCB photos.</p>
+  </header>
+
+  <section>
+    <h2>What's in the CSV</h2>
+    <div class="facts">
+      <div class="fact"><b>72</b><span>objects</span></div>
+      <div class="fact"><b>104</b><span>parts</span></div>
+      <div class="fact"><b>24</b><span>multi-material</span></div>
+      <div class="fact"><b>17</b><span>metal + non-metal</span></div>
+    </div>
+    <p class="muted" style="margin-top:10px">Metal + non-metal: chips can, master chef can, skillet, skillet lid, fork, spoon, knife, power drill, scissors, both screwdrivers, hammer, four clamps, timer. All-metal (6): soup, tuna and meat cans, padlock, key, wrench.</p>
+    <div class="bars" aria-label="Parts per material">
+      <div class="bar"><span class="name">plastic_solid</span><span class="track"><span class="fill" style="width:100%"></span></span><span class="n">30</span></div>
+      <div class="bar"><span class="name">plastic_thin</span><span class="track"><span class="fill" style="width:86.7%"></span></span><span class="n">26</span></div>
+      <div class="bar"><span class="name">steel</span><span class="track"><span class="fill metal" style="width:80%"></span></span><span class="n">24</span></div>
+      <div class="bar"><span class="name">cardboard</span><span class="track"><span class="fill" style="width:16.7%"></span></span><span class="n">5</span></div>
+      <div class="bar"><span class="name">glass</span><span class="track"><span class="fill" style="width:13.3%"></span></span><span class="n">4</span></div>
+      <div class="bar"><span class="name">wood</span><span class="track"><span class="fill" style="width:13.3%"></span></span><span class="n">4</span></div>
+      <div class="bar"><span class="name">rubber</span><span class="track"><span class="fill" style="width:13.3%"></span></span><span class="n">4</span></div>
+      <div class="bar"><span class="name">foam</span><span class="track"><span class="fill" style="width:6.7%"></span></span><span class="n">2</span></div>
+      <div class="bar"><span class="name">leather</span><span class="track"><span class="fill" style="width:6.7%"></span></span><span class="n">2</span></div>
+      <div class="bar"><span class="name">fabric</span><span class="track"><span class="fill" style="width:3.3%"></span></span><span class="n">1</span></div>
+      <div class="bar"><span class="name">aluminium</span><span class="track"><span class="fill metal" style="width:3.3%"></span></span><span class="n">1</span></div>
+      <div class="bar"><span class="name">ceramic</span><span class="track"><span class="fill" style="width:3.3%"></span></span><span class="n">1</span></div>
+    </div>
+    <div class="legend">Parts per material.<span class="sw" style="background:var(--metal)"></span>metal<span class="sw" style="background:var(--accent)"></span>non-metal</div>
+  </section>
+
+  <section>
+    <h2>Before using it</h2>
+    <ul class="checks">
+      <li><label><input type="checkbox" id="c1"><span class="txt"><strong><code>wall_mm</code> isn't always a number.</strong> <code>solid</code> (22 rows) means a solid part. Parse the column as text.</span></label></li>
+      <li><label><input type="checkbox" id="c2"><span class="txt"><strong><code>wall_mm</code> is estimated, not measured.</strong> It only matters for non-metals. At 77 GHz any metal here reflects fully, whatever its thickness.</span></label></li>
+      <li><label><input type="checkbox" id="c3"><span class="txt"><strong><code>area_share</code> is a rough share of the outer surface</strong> and should add to 1 per object.<span class="tag">blank</span> 027 skillet (lid, lid handle) and 070 wood blocks (container).</span></label></li>
+      <li><label><input type="checkbox" id="c4"><span class="txt"><strong>Parts are named, not located.</strong> The CSV says "fork: steel upper 40%, plastic lower 60%" but not which mesh vertices. Decide how to assign them in mmRender: split each mesh by hand, or area-weight per object as a first pass.</span></label></li>
+      <li><label><input type="checkbox" id="c5"><span class="txt"><strong>Some parts are hidden inside.</strong> Drill motor and battery, the steel spring in the Windex sprayer, the timer mechanism. Decide whether mmRender includes them.</span></label></li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Known doubts in the labels</h2>
+    <ul class="checks">
+      <li><label><input type="checkbox" id="d1"><span class="txt"><strong>024 bowl, 025 mug, 029 plate are one matching set</strong> but labelled plastic / plastic / ceramic. They may be enamel steel, which the radar would see as metal. Pick one material for all three.</span></label></li>
+      <li><label><input type="checkbox" id="d2"><span class="txt"><strong>028 skillet_lid has no YCB photos.</strong> Labelled from 027's photos (same lid).</span></label></li>
+      <li><label><input type="checkbox" id="d3"><span class="txt"><strong><code>contents</code> is mostly "unknown if present".</strong> Are the YCB boxes and bottles empty? Liquid behind thin plastic reflects strongly.</span></label></li>
+      <li><label><input type="checkbox" id="d4"><span class="txt"><strong>Some notes still say "check".</strong> The <code>material</code> column holds the validated value.</span></label></li>
+      <li><label><input type="checkbox" id="d5"><span class="txt"><strong><code>category</code>:</strong> 55 copied from mmRender's <code>utils/ycb_obj_angles.csv</code>, 17 filled in by us where it was blank or missing.</span></label></li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Measured reflectivity (not in the CSV yet)</h2>
+    <p class="muted" style="margin-bottom:8px">DCA1000 raw captures (E5), relative to a 6 mm aluminium plate at 40 cm, straight-on, 5 re-placements each. Thickness is nominal.</p>
+    <div class="tablewrap">
+      <table>
+        <thead><tr><th>Sheet</th><th>Thickness</th><th>vs aluminium</th></tr></thead>
+        <tbody>
+          <tr><td>Glass</td><td class="num">3 mm</td><td class="num">−11.9 ± 2.2 dB</td></tr>
+          <tr><td>Acrylic</td><td class="num">3 mm</td><td class="num">−6.7 ± 1.7 dB</td></tr>
+          <tr><td>Epoxy glass</td><td class="num">3 mm</td><td class="num">−6.7 ± 1.6 dB</td></tr>
+          <tr><td>Glass</td><td class="num">6 mm</td><td class="num">−8.0 ± 1.0 dB</td></tr>
+          <tr><td>Acrylic</td><td class="num">7 mm</td><td class="num">−21.9 ± 3.9 dB</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p style="margin-top:8px">Thickness changes reflection as much as material does, so reflectivity should come from <code>material</code> and <code>wall_mm</code> together. Cardboard, wood, rubber and the rest need model estimates. Planned file: <code>material_reflectivity.csv</code>.</p>
+  </section>
+
+  <section>
+    <h2>mmRender plan (staff asked for tasks, outcome, metrics)</h2>
+    <dl class="plan">
+      <div><dt>Task</dt><dd>Give each point a reflectivity weight from these labels. mmRender currently weights all points equally.</dd></div>
+      <div><dt>Expected</dt><dd>Plastic and glass parts render weaker than metal, by up to about 15 dB in E5.</dd></div>
+      <div><dt>Metric</dt><dd>Rendered vs real (MITO) radar images of the same objects, before and after. Later: reconstruction recall and precision on the 24 multi-material objects.</dd></div>
+    </dl>
+  </section>
+
+  <footer>Ticks are saved in this browser only. Source: <code>wf_sim/materials/CHECKLIST_for_Ivan.md</code>.</footer>
+</main>
+
+<script>
+(function () {
+  var KEY = "ycb-handoff-checks";
+  var state = {};
+  try { state = JSON.parse(localStorage.getItem(KEY) || "{}"); } catch (e) { state = {}; }
+  document.querySelectorAll('.checks input[type="checkbox"]').forEach(function (box) {
+    if (state[box.id]) box.checked = true;
+    box.addEventListener("change", function () {
+      state[box.id] = box.checked;
+      try { localStorage.setItem(KEY, JSON.stringify(state)); } catch (e) {}
+    });
+  });
+})();
+</script>

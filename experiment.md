@@ -83,6 +83,8 @@ Run commands in PowerShell from `Project\wf_sim`, after `.venv-win\Scripts\activ
 **Check:** `clip_pct` and `max_adc` at each setting. Without clipping, `peak_db` should drop 6 dB per step.
 
 ### E5: can we tell materials apart?
+**Status (Nov 19):** Part 1 done (35 captures, 5 rounds). Part 2 skipped. Calipers not done. Results: `MEASUREMENT_LOG.md` Session 6.
+
 **Run after E0-E3 pass** (passed Nov 19). **TX back-off 6** (E4: linear, no clipping; bo18 is ~9 dB low): after the setup script, run `studio_set_backoff.lua` with `BACKOFF = 6, NUM_FRAMES = 20`. Frames = 20 per capture. Don't redo RF Init or reconfigure during a part.
 
 **Priority:** Part 1 (reflection) is the main test, because Proposal A is about reflectivity. Run Part 2 if time allows.

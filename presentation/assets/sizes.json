@@ -1,0 +1,146 @@
+{
+ "e0_plate_vs_empty.png": [
+  900,
+  450
+ ],
+ "e1_40_vs_60.png": [
+  900,
+  450
+ ],
+ "e2_still.png": [
+  1048,
+  1013
+ ],
+ "e4_backoff.png": [
+  750,
+  480
+ ],
+ "e5_curves.png": [
+  750,
+  570
+ ],
+ "e5_levels.png": [
+  1600,
+  1000
+ ],
+ "fresnel.png": [
+  1004,
+  761
+ ],
+ "iwr_validation.png": [
+  1220,
+  759
+ ],
+ "jar_partials.png": [
+  1275,
+  1126
+ ],
+ "label_ui.png": [
+  1908,
+  710
+ ],
+ "pipeline.png": [
+  1687,
+  729
+ ],
+ "s1_distance.jpg": [
+  1600,
+  1200
+ ],
+ "s1_radar.jpg": [
+  1200,
+  1600
+ ],
+ "s1_sheets.jpg": [
+  1200,
+  1600
+ ],
+ "s1_transmission.jpg": [
+  1200,
+  1600
+ ],
+ "s2_acrylic.jpg": [
+  1600,
+  1200
+ ],
+ "s2_acrylic_sq.jpg": [
+  1200,
+  1200
+ ],
+ "s2_alu.jpg": [
+  1200,
+  1600
+ ],
+ "s2_alu_sq.jpg": [
+  1200,
+  1200
+ ],
+ "s2_bench.jpg": [
+  1200,
+  1600
+ ],
+ "s2_glass.jpg": [
+  1600,
+  1200
+ ],
+ "s2_glass_side.jpg": [
+  1200,
+  1600
+ ],
+ "s2_glass_sq.jpg": [
+  1200,
+  1200
+ ],
+ "s2_layout.jpg": [
+  1600,
+  1200
+ ],
+ "s2_mark60.jpg": [
+  1200,
+  1600
+ ],
+ "s2_stack.jpg": [
+  900,
+  1600
+ ],
+ "s2_white.jpg": [
+  1600,
+  1200
+ ],
+ "s2_white_sq.jpg": [
+  1200,
+  1200
+ ],
+ "studio_postproc.png": [
+  3840,
+  1131
+ ],
+ "visibility.png": [
+  980,
+  969
+ ],
+ "ycb_bleach.jpg": [
+  672,
+  512
+ ],
+ "ycb_clamp.jpg": [
+  672,
+  512
+ ],
+ "ycb_drill.jpg": [
+  672,
+  512
+ ],
+ "ycb_fork.jpg": [
+  672,
+  512
+ ],
+ "ycb_mug.jpg": [
+  672,
+  512
+ ],
+ "ycb_skillet.jpg": [
+  672,
+  512
+ ]
+}
